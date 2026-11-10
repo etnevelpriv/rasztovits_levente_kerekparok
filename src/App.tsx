@@ -1,25 +1,39 @@
 import { useEffect, useState } from "react";
 import { KerekparLista } from "./Components/KerekparLista/KerekparLista";
 import type { Kerekpar_interface } from "./Models/Interfaces/Kerekpar.interface";
+import { KerekparStats } from "./Components/KerekparStats/KerekparStats";
 export const App = function () {
-  const [kerekparok, setKerekparok] = useState<Kerekpar_interface[]>();
-  useEffect(()=>{
+  const [kerekparok, setKerekparok] = useState<Kerekpar_interface[]>([]);
+  const [betoltott, setBetoltott] = useState<boolean>(false);
+  
+  useEffect(() => {
+    console.log("fut")
     const loadData = async function () {
       try {
         const content = await fetch("kerekparok.json")
-        const data:Kerekpar_interface[] = await content.json();
+        const data: Kerekpar_interface[] = await content.json();
         setKerekparok(data);
-      } catch (e:Error | any) {
+        setBetoltott(true)
+      } catch (e: Error | any) {
         throw new Error(e);
       };
     };
     loadData();
   }, []);
 
-  return (
-    <div className="container">
-      <h1>Kiadó kerékpárok</h1>
-      <KerekparLista></KerekparLista>
-    </div>
-  )
+  if (betoltott) {
+    return (
+      <div className="container">
+        <h1>Kiadó kerékpárok</h1>
+        <KerekparStats kerekparok={kerekparok}></KerekparStats>
+        <KerekparLista></KerekparLista>
+      </div>
+    )
+  } else {
+    return (
+      <div className="container">
+        <h1>Meg tolt az oldal</h1>
+      </div>
+    )
+  }
 };
