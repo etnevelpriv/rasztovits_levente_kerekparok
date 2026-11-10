@@ -3,5 +3,5 @@ export interface Kerekpar_interface {
     nev:string;
     tipus:string;
     napiDij:number;
-    szin:number;
+    szin:string;
 }
