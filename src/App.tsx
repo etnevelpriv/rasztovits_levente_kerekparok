@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { KerekparLista } from "./Components/KerekparLista/KerekparLista";
 import type { Kerekpar_interface } from "./Models/Interfaces/Kerekpar.interface";
 import { KerekparStats } from "./Components/KerekparStats/KerekparStats";
+import "./App.css"
 export const App = function () {
   const [kerekparok, setKerekparok] = useState<Kerekpar_interface[]>([]);
   const [betoltott, setBetoltott] = useState<boolean>(false);
-  
+
   useEffect(() => {
     console.log("fut")
     const loadData = async function () {
@@ -26,7 +27,7 @@ export const App = function () {
       <div className="container">
         <h1>Kiadó kerékpárok</h1>
         <KerekparStats kerekparok={kerekparok}></KerekparStats>
-        <KerekparLista></KerekparLista>
+        <KerekparLista kerekparok={kerekparok}></KerekparLista>
       </div>
     )
   } else {

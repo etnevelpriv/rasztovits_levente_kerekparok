@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Kerekpar_prop } from "../../Models/Props/Kerekpar.prop";
+import "./Kerekpar.css"
 
 export const Kerekpar = function (prop: Kerekpar_prop) {
     const [detailVisibile, setDetailVisibility] = useState<boolean>(true);
